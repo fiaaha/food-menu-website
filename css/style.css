@@ -205,12 +205,13 @@ header {
 }
 
 .hero-img {
-    width: 800px; /* perbesar gambar */
-    max-width: none;
-    height: auto;
-    object-fit: contain;
-    opacity: 0.9;
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0.2; /* atau nilai yang kamu suka agar tidak ganggu teks */
 }
+
 
 @media (max-width: 992px) {
     .hero {
