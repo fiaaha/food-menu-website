@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Burns&Wraps Menu</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Burns&amp;Wraps</div>
+            <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+                
+            </ul>
+            <button class="cart-btn" id="open-checkout-btn" onclick="window.location.href='checkout.html'" aria-label="Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61l1.38-7.39H6" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <section class="menu-section" id="food-menu">
+            <h2>Food Menu</h2>
+            <div class="menu-grid">
+                <!-- 12 food items -->
+                <div class="menu-item" data-name="Cheese Beef Burger" data-price="24.000">
+                    <img src="images/Burger.png" alt="Burger" />
+                    <h3>Cheese Beef Burger</h3>
+                    <p>Juicy beef burger with lettuce and tomato.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 24.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Double Beef Burger" data-price="32.000">
+                    <img src="images/Doble Beef.png" alt="Double Beef" />
+                    <h3>Double Beef Burger</h3>
+                    <p>burger with double juicy beef</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 32.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Chicken Burger" data-price="24.000">
+                    <img src="images/Chicken Burger.png" alt="Chicken Burger" />
+                    <h3>Chicken Burger</h3>
+                    <p>Grilled chicken in a bun with veggies and sauce.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 24.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Cheese Chicken Burger" data-price="27.000">
+                    <img src="images/Chicken Cheese Bg.png" alt="Cheese Chicken Burger" />
+                    <h3>Cheese Chicken Burger</h3>
+                    <p>Chicken burger with melted cheese and fresh toppings.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 27.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="French Fries" data-price="15.000">
+                    <img src="images/French Fries.png" alt="French Fries" />
+                    <h3>French Fries</h3>
+                    <p>Crispy golden potato fries, perfectly salted and served hot.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 15.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Sausage Roll" data-price="24.000">
+                    <img src="images/HotDog.png" alt="Sausage Roll" />
+                    <h3>Sausage Roll</h3>
+                    <p>Grilled sausage in a soft bun with sauces.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 24.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Original Kebab" data-price="24.000">
+                    <img src="images/Kebab.png" alt="Kebab" />
+                    <h3>Original Kebab</h3>
+                    <p>Seasoned meat with veggies in pita bread.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 24.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Onion Ring" data-price="18.000">
+                    <img src="images/Onion Ring.png" alt="Onion Ring" />
+                    <h3>Onion Ring</h3>
+                    <p>Crispy fried onion rings.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 18.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Chicken Nugget" data-price="20.000">
+                    <img src="images/Nugget.png" alt="Chicken Nugget" />
+                    <h3>Chicken Nugget</h3>
+                    <p>Crunchy bite-sized chicken pieces.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 20.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Chicken Wings" data-price="25.000">
+                    <img src="images/Chicken Wings.png" alt="Chicken Wings" />
+                    <h3>Chicken Wings</h3>
+                    <p>Fried and flavorful chicken wings.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 25.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Potato Ball" data-price="20.000">
+                    <img src="images/Potato Ball.png" alt="Potato Ball" />
+                    <h3>Potato Ball</h3>
+                    <p>Crispy mashed potato balls, golden fried.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 20.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Zuppa Soup" data-price="22.000">
+                    <img src="images/Zuppa Soup.png" alt="Zuppa Soup" />
+                    <h3>Zuppa Soup</h3>
+                    <p>Creamy soup topped with flaky pastry.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 22.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Drink Menu</h2>
+            <div class="menu-grid">
+                <!-- 4 drink items -->
+                <div class="menu-item" data-name="Mineral Water" data-price="5.000">
+                    <img src="images/Minerale.png" alt="Mineral Water" />
+                    <h3>Mineral Water</h3>
+                    <p>Bottled drinking water.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 5.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Iced Tea" data-price="8.000">
+                    <img src="images/Ice Tea.png" alt="Iced Tea" />
+                    <h3>Iced Tea</h3>
+                    <p>Sweet and refreshing cold tea.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 8.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Milkshake" data-price="20.000">
+                    <img src="images/Str Smothies.png" alt="Milkshake" />
+                    <h3>Milkshake</h3>
+                    <p>Creamy shake in chocolate or strawberry flavor.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 20.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="Sundae Ice Cream" data-price="15.000">
+                    <img src="images/Sundae.png" alt="Sundae Ice Cream" />
+                    <h3>Sundae Ice Cream</h3>
+                    <p>Soft-serve ice cream with chocolate or strawberry syrup.</p>
+                    <div class="bottom-row">
+                        <p class="price">Rp 15.000</p>
+                        <button class="order-btn">Order</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer>
+  <section class="footer" id="contact">
+    <div class="footer-top">
+      <div class="footer-column">
+        <p class="brand"><strong>Burns&amp;Wraps</strong></p>
+        <p>Serving delicious food with love since 2020</p>
+        <p>
+            <i class="fas fa-phone"></i> +1 555 123-4567 &nbsp;|&nbsp;<br>
+            <i class="fas fa-envelope"></i> hello@burnsandwraps.com &nbsp;|&nbsp;<br>
+            <i class="fas fa-home"></i> 123 Food Street, City &nbsp;|&nbsp;
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <p><strong>Follow Us:</strong></p>
+        <p>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+  </div>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <p><strong>Quick Links:</strong></p>
+        <p>
+          <a href="/terms-and-conditions">Terms and Conditions</a><br>
+          <a href="/privacy-policy">Privacy Policy</a><br>
+          <a href="/faq">FAQ</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Burns&amp;Wraps. All rights reserved.</p>
+    </div>
+  </section>
+</footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

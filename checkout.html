@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Burns&Wraps Checkout</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.5);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .checkout-container {
+            background-color: #fff8f0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(211, 84, 0, 0.4);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #d35400;
+            margin-bottom: 20px;
+        }
+
+        #order-items {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        #order-items li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .item-controls button {
+            background-color: #e67e22;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+            color: white;
+        }
+
+        .item-controls button:hover {
+            background-color: #d35400;
+        }
+
+        #total-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #d35400;
+            text-align: right;
+        }
+
+        #pay-now-btn,
+        #back-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #pay-now-btn:hover,
+        #back-btn:hover {
+            background-color: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <h2>Your Order</h2>
+        <ul id="order-items"></ul>
+        <div id="total-price">Total: Rp0,000</div>
+        <label for="order-notes" style="display:block; text-align:left; margin-bottom:5px; font-weight:600;">Notes:</label>
+        <textarea id="order-notes" rows="3" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ccc; 
+            resize: vertical;" placeholder="Tambahkan catatan untuk pesanan Anda..."></textarea>
+        <button id="pay-now-btn">Pay Now</button>
+        <button id="back-btn" onclick="window.location.href='menu.html'">Back to Menu</button>
+    </div>
+
+    <div class="payment-overlay" id="payment-overlay">
+  <div class="payment-popup">
+    <p><strong>✅ Thank You For Your Payment!<br>Please wait for your order.</strong></p>
+    <p>Please rate your order:</p>
+    <div class="star-rating" id="star-rating">
+      <span data-star="1">★</span>
+      <span data-star="2">★</span>
+      <span data-star="3">★</span>
+      <span data-star="4">★</span>
+      <span data-star="5">★</span>
+    </div>
+    <p id="thank-you" style="display: none; margin-top: 10px;">🎉 Thank you for your rating!</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const orderItemsList = document.getElementById('order-items');
+    const totalPriceEl = document.getElementById('total-price');
+    const payNowBtn = document.getElementById('pay-now-btn');
+
+    function formatRupiah(number) {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 3
+        }).format(number);
+    }
+
+    function updateLocalStorage(orders) {
+        localStorage.setItem('orders', JSON.stringify(orders));
+    }
+
+    function updateTotal(orders) {
+        let total = 0;
+        orders.forEach(item => {
+            total += parseFloat(item.price) * item.quantity;
+        });
+        totalPriceEl.textContent = `Total: ${formatRupiah(total)}`;
+    }
+
+function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orderItemsList.innerHTML = '';
+
+    if (orders.length === 0) {
+        orderItemsList.innerHTML = '<li>No items ordered yet.</li>';
+        totalPriceEl.textContent = 'Total: Rp0,000';
+        payNowBtn.disabled = true;
+        return;
+    }
+
+    payNowBtn.disabled = false;
+
+    for (let i = 0; i < orders.length; i++) {
+        const order = orders[i];
+        const li = document.createElement('li');
+        const itemTotal = parseFloat(order.price) * order.quantity;
+
+        const itemInfo = document.createElement('div');
+        itemInfo.className = 'item-info';
+        itemInfo.textContent = `${order.name} x${order.quantity}`;
+
+        const itemPrice = document.createElement('div');
+        itemPrice.textContent = formatRupiah(itemTotal);
+
+        const controls = document.createElement('div');
+        controls.className = 'item-controls';
+
+// Tombol minus — hanya kurangi quantity, tidak menghapus
+const btnMinus = document.createElement('button');
+btnMinus.textContent = '-';
+btnMinus.onclick = () => {
+    if (order.quantity > 1) {
+        order.quantity -= 1;
+        updateLocalStorage(orders);
+        loadOrders();
+    }
+    // Kalau sudah 1, tidak bisa dikurangi lagi
+};
+
+
+        // Tombol plus
+        const btnPlus = document.createElement('button');
+        btnPlus.textContent = '+';
+        btnPlus.onclick = () => {
+            order.quantity += 1;
+            updateLocalStorage(orders);
+            loadOrders();
+        };
+
+        // Tombol hapus
+        const btnDelete = document.createElement('button');
+        btnDelete.textContent = '🗑';
+        btnDelete.title = 'Hapus item';
+        btnDelete.onclick = () => {
+            orders.splice(i, 1);
+            updateLocalStorage(orders);
+            loadOrders();
+        };
+
+        controls.appendChild(btnMinus);
+        controls.appendChild(btnPlus);
+        controls.appendChild(btnDelete);
+
+        li.appendChild(itemInfo);
+        li.appendChild(itemPrice);
+        li.appendChild(controls);
+
+        orderItemsList.appendChild(li);
+    }
+
+    updateTotal(orders);
+}
+
+    payNowBtn.addEventListener('click', () => {
+    localStorage.removeItem('orders');
+    loadOrders();
+
+    const notes = document.getElementById('order-notes').value;
+    localStorage.setItem('orderNotes', notes);
+
+    const overlay = document.getElementById('payment-overlay');
+    overlay.style.display = 'flex';
+
+    const stars = document.querySelectorAll('#star-rating span');
+    let rated = false;
+
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+            if (rated) return;
+            stars.forEach((s, i) => s.classList.toggle('hover', i <= index));
+        });
+
+        star.addEventListener('mouseout', () => {
+            if (rated) return;
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+
+        star.addEventListener('click', () => {
+            if (rated) return;
+            rated = true;
+            stars.forEach((s, i) => s.classList.toggle('selected', i <= index));
+            document.getElementById('thank-you').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+                }, 1000);
+        });
+    });
+});
+
+    loadOrders();
+});
+</script>
+</body>
+</html>
