@@ -209,9 +209,23 @@ header {
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    opacity: 0.2; /* atau nilai yang kamu suka agar tidak ganggu teks */
+    opacity: 0.8; /* atau nilai yang kamu suka agar tidak ganggu teks */
 }
 
+.hero {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 20px 20px;
+    }
+
+    .hero-img {
+        object-position: top;
+    }
+}
 
 @media (max-width: 992px) {
     .hero {
