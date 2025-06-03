@@ -230,13 +230,15 @@ header {
     }
 
     .hero-img {
-        width: 90%;
-        max-width: 500px;
-        opacity: 0.6;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        opacity: 0.4;
         position: relative;
         top: auto;
         left: auto;
         z-index: 1;
+        object-position: right center;
     }
 }
 
@@ -256,10 +258,10 @@ header {
 
     .hero-img {
         width: 100%;
+        height: 100%;
         opacity: 0.4;
-        object-fit: contain;
-        object-position: center top;
-        height: auto;         /* Pastikan tinggi menyesuaikan gambar */
+        object-fit: cover;
+        object-position: center top;      
         max-height: 80vh;
     }
 
