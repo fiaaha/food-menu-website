@@ -132,6 +132,7 @@
 </div>
 
 <script>
+
 document.addEventListener('DOMContentLoaded', () => {
     const orderItemsList = document.getElementById('order-items');
     const totalPriceEl = document.getElementById('total-price');
@@ -268,8 +269,19 @@ btnMinus.onclick = () => {
     });
 });
 
+
     loadOrders();
+    // Ganti teks tombol back jika datang dari index.html
+const urlParams = new URLSearchParams(window.location.search);
+const fromPage = urlParams.get('from');
+const backBtn = document.getElementById('back-btn');
+
+if (fromPage === 'index' && backBtn) {
+    backBtn.textContent = 'Choose Your Menu';
+}
+
 });
+
 </script>
 </body>
 </html>
