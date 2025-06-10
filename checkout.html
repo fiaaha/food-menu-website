@@ -102,6 +102,48 @@
         #back-btn:hover {
             background-color: #d35400;
         }
+
+        .payment-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff8f0;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(211, 84, 0, 0.4);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.payment-popup button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #e67e22;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.payment-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px); /* efek blur */
+    background-color: rgba(0, 0, 0, 0.3); /* semi-transparan */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9; /* di bawah .payment-popup (z-index: 10) */
+}
+
     </style>
 </head>
 <body>
@@ -131,7 +173,71 @@
   </div>
 </div>
 
+<!-- Modal Pilihan Metode Pembayaran -->
+<div id="payment-method-modal" style="display: none;" class="payment-popup">
+  <p><strong>Pilih Metode Pembayaran:</strong></p>
+  <button onclick="choosePayment('cash')">Cash</button>
+  <button onclick="choosePayment('qris')">Qris</button>
+</div>
+
+<!-- QRIS Section -->
+<div id="qris-section" style="display: none; text-align:center;" class="payment-popup">
+  <p><strong>Scan QR Code for Payment:</strong></p>
+  <img src="images/Qris.png" alt="QRIS Code" style="width:200px; height:auto; margin:10px auto;" />
+  <button onclick="finishQrisPayment()">Finish</button>
+</div>
+
+<!-- Blur background untuk modal metode pembayaran -->
+<div class="payment-overlay" id="modal-overlay" style="display: none;"></div>
+
 <script>
+
+function choosePayment(method) {
+    document.getElementById('payment-method-modal').style.display = 'none';
+
+    if (method === 'cash') {
+        document.getElementById('modal-overlay').style.display = 'none';
+        showRating();
+    } else if (method === 'qris') {
+        document.getElementById('qris-section').style.display = 'flex';
+    }
+}
+
+function finishQrisPayment() {
+    document.getElementById('qris-section').style.display = 'none';
+    document.getElementById('modal-overlay').style.display = 'none';
+    showRating();
+}
+
+function showRating() {
+    const overlay = document.getElementById('payment-overlay');
+    overlay.style.display = 'flex';
+
+    const stars = document.querySelectorAll('#star-rating span');
+    let rated = false;
+
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+            if (rated) return;
+            stars.forEach((s, i) => s.classList.toggle('hover', i <= index));
+        });
+
+        star.addEventListener('mouseout', () => {
+            if (rated) return;
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+
+        star.addEventListener('click', () => {
+            if (rated) return;
+            rated = true;
+            stars.forEach((s, i) => s.classList.toggle('selected', i <= index));
+            document.getElementById('thank-you').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        });
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const orderItemsList = document.getElementById('order-items');
@@ -233,42 +339,17 @@ btnMinus.onclick = () => {
     updateTotal(orders);
 }
 
-    payNowBtn.addEventListener('click', () => {
+payNowBtn.addEventListener('click', () => {
     localStorage.removeItem('orders');
     loadOrders();
 
     const notes = document.getElementById('order-notes').value;
     localStorage.setItem('orderNotes', notes);
 
-    const overlay = document.getElementById('payment-overlay');
-    overlay.style.display = 'flex';
-
-    const stars = document.querySelectorAll('#star-rating span');
-    let rated = false;
-
-    stars.forEach((star, index) => {
-        star.addEventListener('mouseover', () => {
-            if (rated) return;
-            stars.forEach((s, i) => s.classList.toggle('hover', i <= index));
-        });
-
-        star.addEventListener('mouseout', () => {
-            if (rated) return;
-            stars.forEach(s => s.classList.remove('hover'));
-        });
-
-        star.addEventListener('click', () => {
-            if (rated) return;
-            rated = true;
-            stars.forEach((s, i) => s.classList.toggle('selected', i <= index));
-            document.getElementById('thank-you').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = 'index.html';
-                }, 1000);
-        });
-    });
+    // Tampilkan blur + modal metode pembayaran
+    document.getElementById('modal-overlay').style.display = 'flex';
+    document.getElementById('payment-method-modal').style.display = 'flex';
 });
-
 
     loadOrders();
     // Ganti teks tombol back jika datang dari index.html
