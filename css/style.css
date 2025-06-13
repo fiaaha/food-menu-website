@@ -146,7 +146,7 @@ header {
     justify-content: flex-start;
     align-items: center;
     padding: 150px 60px;
-    background: linear-gradient(135deg, #f08f19 0%, #da4015 100%);
+    background: linear-gradient(135deg, #f08f19 0%, #c43710 100%);
     margin-bottom: 45px;
 }
 
@@ -177,17 +177,19 @@ header {
     font-size: 1.4rem;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, 0.3 ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #lets-order-btn:hover {
-    background-color: #fff1e6;
-    color: #da4015
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
 }
 
 #lets-order-btn:active {
     background-color: #b93612;
     color: #ffe0b2;
+    transform: translateY(0); /* kembali rata */
+    box-shadow: none;
 }
 
 /* Hero Images */
@@ -309,6 +311,13 @@ header {
     padding: 15px;
     transition: transform 0.3s ease;
     cursor: pointer;
+
+    display: flex;                  
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;           
+    height: 100%;                  
+    text-align: center;
 }
 
 .top-menu-item:hover {
@@ -317,8 +326,13 @@ header {
 
 .top-menu-item img {
     width: 70%;
+    max-height: 130px;
+    object-fit: contain; 
     border-radius: 15px;
     margin-bottom:5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .top-menu-item h3 {
@@ -552,6 +566,10 @@ button, .nav-link {
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
+.close-btn:hover {
+  color: #e74c3c;
+}
+
 .star-rating {
   font-size: 2rem;
   color: #ccc;
@@ -642,4 +660,69 @@ footer i {
 .fade-up.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.modal-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 25px 20px;
+  max-width: 400px;
+  width: 90%;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+}
+
+.modal-center p {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-center img {
+  max-width: 200px;
+}
+
+.modal-center button {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-center button:hover {
+  background-color: #d35400;
+}
+
+/* Tombol silang */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d35400;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 50%;
+  transition: color 0.3s ease;
+  background-color: transparent !important;
+}
+
+.close-btn:hover {
+  background-color: rgba(211, 84, 0, 0.1);
+  color: #b93612;
+  background-color: transparent;
 }
