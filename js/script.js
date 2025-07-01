@@ -81,6 +81,21 @@ window.addEventListener('load', revealOnScroll); // untuk langsung tampil jika s
             window.location.href = 'menu.html#food-menu';
         });
     }
+
+    // Hero animation saat halaman dibuka
+const heroContent = document.querySelector('.hero-content');
+const heroImages = document.querySelector('.hero-images');
+
+setTimeout(() => {
+    if (heroContent) heroContent.classList.add('animate');
+    if (heroImages) heroImages.classList.add('animate');
+
+    // Jalankan animasi slide-in tiap kalimat
+    const spans = heroContent.querySelectorAll('p span');
+    spans.forEach(span => {
+        span.style.animationPlayState = 'running';
+    });
+}, 400);
 });
 
 // Smooth scroll to section

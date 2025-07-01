@@ -749,3 +749,49 @@ footer i {
   color: #b93612;
   background-color: transparent;
 }
+
+/* === ANIMASI HERO SECTION MASUK DARI SAMPING === */
+.hero-content {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero-content.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-images {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.hero-images.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* === ANIMASI TIAP KALIMAT PADA PARAGRAF HERO === */
+.hero-content p span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.6s ease forwards;
+  animation-play-state: paused; /* hanya aktif setelah diaktifkan lewat JS */
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delay agar span muncul berurutan */
+.hero-content p span:nth-child(1) { animation-delay: 0.2s; }
+.hero-content p span:nth-child(2) { animation-delay: 0.6s; }
+.hero-content p span:nth-child(3) { animation-delay: 1.0s; }
+.hero-content p span:nth-child(4) { animation-delay: 1.4s; }
+.hero-content p span:nth-child(5) { animation-delay: 1.8s; }
