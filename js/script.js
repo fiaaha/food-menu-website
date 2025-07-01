@@ -83,3 +83,10 @@ window.addEventListener('load', revealOnScroll); // untuk langsung tampil jika s
     }
 });
 
+// Smooth scroll to section
+window.scrollToSection = function (sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+};

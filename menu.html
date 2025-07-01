@@ -28,8 +28,14 @@
         </nav>
     </header>
     <main>
+        <div class="menu-section">
+            <div class="menu-toggle-buttons">
+                <button class="scroll-btn" onclick="scrollToSection('food-menu')">Food</button>
+                <button class="scroll-btn" onclick="scrollToSection('drink-menu')">Drink</button>
+            </div>
+        </div>
         <section class="menu-section" id="food-menu">
-            <h2>Food Menu</h2>
+            <h2 id="food-menu">Food Menu</h2>
             <div class="menu-grid">
                 <!-- 12 food items -->
                 <div class="menu-item" data-name="Cheese Beef Burger" data-price="24.000">
@@ -142,7 +148,7 @@
                 </div>
             </div>
 
-            <h2>Drink Menu</h2>
+            <h2 id="drink-menu">Drink Menu</h2>
             <div class="menu-grid">
                 <!-- 4 drink items -->
                 <div class="menu-item" data-name="Mineral Water" data-price="5.000">
